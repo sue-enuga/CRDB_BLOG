@@ -1,8 +1,8 @@
-# Manual Components Setup Required for Self Hosting CRDB on AWS.
+# Pre-Requisite Configurations for Deploying CRDB in AWS
 
 Following this document will help you create the necessary Components required to self host CRDB. Things that will be covered in this article are:
->
-> 1. How to set up VPC, Subnet, RouteTables , IG
+
+> 1. How to set up VPC, Subnet, RouteTables, IG
 > 2. How to configure Security Groups
 > 3. How to create an Instance
 
