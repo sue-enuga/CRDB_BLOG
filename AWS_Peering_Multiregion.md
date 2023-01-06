@@ -1,13 +1,14 @@
-# Configuring Multi Region in AWS for CRDB
+# Post-Configuration steps for deploying Multi Region in AWS for CockroachDB
 
-This document articulates the manual configuration that is required to configure a Multi-Region Setup in AWS.
+This article details the manual configuration that is required to configure a Multi-Region Setup in AWS.
 
 ### Pre-requisites
+* You have deployed a single instance on AWS already and are familiar with the components.
 * Understanding how to deploy in AWS & have working knowledge of how to deploy a single region instance of CRDB in AWS, for more info, refer to: [Deploy on AWS](https://www.cockroachlabs.com/docs/v22.2/deploy-cockroachdb-on-aws)
 * Understand the supported Hardware, software requirements required for Multi-Region setup, for more info, refer to:[Production Checklist](https://www.cockroachlabs.com/docs/v22.2/recommended-production-settings) 
 * Review the Topology Patters to understand what capability is needed for your cluster, for more info, refer to: [Topology Patters](https://www.cockroachlabs.com/docs/v22.2/topology-patterns)
-* Lastly, you must have at-least 3 regions of CRDB instances created before you proceed with the document.
-> Note: We assume you have already created 9 instances of single CRDB, 3 per region for this exercise, For illustration purposes we are using 3 AWS regions here, Oregon, Virginia & Ohio as in West, East & Central, We have 3 instances deployed in each region, one per AZ. so making it 9 total nodes. 
+* Lastly, you must have at-least 3 regions of CRDB clusters created before you proceed with the document.
+> Note: We assume you have already created 9 nodes of single CRDB, 1 per AZ which makes that, a cluster of 3 per region for this exercise, For illustration purposes we are using 3 AWS regions here, Oregon, Virginia & Ohio as in West, East & Central, We have 3 instances deployed in each region, one per AZ. so making it 9 total nodes. 
 
 ### Peering Connections
 - First Step to configuring these nodes is to configure peering connections between the regions. 
@@ -32,7 +33,7 @@ This document articulates the manual configuration that is required to configure
 - Also select the `VPC ID` of your VPC that you have hosted the CRDB instances in the second region.
 - See the below image for reference:
 - ![PC](/Images/Aws_peering/aws_peering_conn_create.png)
->Note that this is only one connection between Oregon & Ohio, you'll need to repeat this for the other 2 connections.
+>Note that this is only one connection between Oregon & Ohio, you'll need to repeat this for the other 2 region's connections.
 
 #### Step2: Accepting the Peering Connection Request
 - Once the peering connection in first region, Oregon is created successfully, Navigate to the second region, Ohio.
@@ -73,4 +74,5 @@ This document articulates the manual configuration that is required to configure
 - After completing the configuration in all the 3 regions, you have now successfully established a secure peering connection that is required to configure a multi region.
 - you may now proceed to configuring the multi-region capabilities for CRDB.
 
-
+> Here is the node-map of the multi-region CRDB setup for the above regions, Oregon, Virginia & Ohio.. from the cockroach's DB Console. (However you need an enterprise license key to be able to see this). Pretty cool right ?? 
+-![nodemap](Images/Aws_peering/multi-region-final.png)
